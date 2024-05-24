@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the Company - Starbucks</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: 'Pangolin', cursive;
+    }
+    .navbar {
+      background-color: rgba(0, 112, 74, 0.8);
+    }
+    .navbar-brand {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .nav-link {
+      color: #fff !important;
+    }
+    .header {
+      background-color: rgba(0, 112, 74, 0.9);
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card-title {
+      color: #00704A;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .card-text {
+      color: #333;
+      font-size: 1.1rem;
+    }
+    .advertisement {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .advertisement img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .member-image {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin: 0 auto 20px;
+    }
+    .card-body {
+      text-align: center;
+    }
+    .section-space {
+      margin-bottom: 50px;
+    }
+    .references {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      margin-top: 50px;
+    }
+    .footer {
+      background-color: rgba(0, 112, 74, 0.9);
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .navbar-brand img {
+            border-radius: 50%;
+        }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="images/starbslogo.png" alt="Coffee Shop Logo" height="50">
+    </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="header">
+    <h1>About the Company</h1>
+  </div>
+
+  <div class="container mt-4">
+    <div class="row section-space">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="images/noah.png" alt="Noah" class="card-img-top member-image">
+          <div class="card-body">
+            <h5 class="card-title">Noah</h5>
+            <p class="card-text">If you have lemons, make lemonade!</p>
+            <p class="card-text">Contribution: Modifying and JS</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="images/fretz.png" alt="Fretz" class="card-img-top member-image">
+          <div class="card-body">
+            <h5 class="card-title">Fretz</h5>
+            <p class="card-text">Life is what happens when you're busy making other plans.</p>
+            <p class="card-text">Contribution: Company page</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="images/alexa.jpg" alt="Alexa" class="card-img-top member-image">
+          <div class="card-body">
+            <h5 class="card-title">Alexa</h5>
+            <p class="card-text">Tama na kakaisip, don't overtake.</p>
+            <p class="card-text">Contribution: Shopping cart page</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="advertisement">
+          <img src="images/special_offer.jpg" alt="Special Offer">
+          <h3>Special Offer!</h3>
+          <p>Get 50% off on all drinks every Friday!</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="advertisement">
+          <img src="images/new_menu.jpg" alt="New Menu">
+          <h3>Try Our New Menu!</h3>
+          <p>Introducing our delicious range of pastries and sandwiches.</p>
+        </div>
+      </div>
+    </div>
+	
+    <div class="references mt-4 p-4">
+      <h3 class="text-center">References</h3>
+      <ul>
+        <li>https://developer.mozilla.org/en-US/docs/Learn/CSS/Howto/Make_box_transparent</li>
+        <li>https://phppot.com/javascript/javascript-shopping-cart/</li>
+        <li>https://www.w3schools.com/js/js_arrays.asp</li>
+        <li>https://www.w3schools.com/js/js_ex_dom.asp</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <div class="container">
+      <p>&copy; 2024 Starbucks. All Rights Reserved.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

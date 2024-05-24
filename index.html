@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Starbucks Coffee</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFEF7;
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/006/971/788/small_2x/blur-coffee-cafe-shop-and-bokeh-light-bulb-background-defocused-image-and-blur-customer-people-in-coffee-counter-shop-blur-cafe-store-shop-lifestyles-and-client-service-food-event-photo.jpg');
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+        }
+        @font-face {
+            font-family: RomauntGaolines;
+            src: url(fonts/RomauntGaolines.ttf);
+        }
+        button {
+            font-family: RomauntGaolines;
+        }
+        @font-face {
+            font-family: KGRedHands;
+            src: url(fonts/KGRedHands.ttf);
+        }
+        p {
+            font-family: KGRedHands;
+        }
+        @font-face {
+            font-family: BlackRunters;
+            src: url(fonts/BlackRunters.otf);
+        }
+        h2 {
+            font-family: BlackRunters;
+        }
+        @font-face {
+            font-family: AVELIRE;
+            src: url(fonts/AVELIRE.ttf);
+        }
+        nav {
+            font-family: AVELIRE;
+            font-size: large;
+            margin-top: 30px;
+            margin-left: 80px;
+            margin-right: 80px;
+            border-radius: 30px;  
+            background-color: #313131;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 999; 
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        nav ul {
+            font-size: larger;
+            list-style-type: none;
+            margin: 0;
+            padding: 0px;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #FFFEF7;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            color: #007043;
+        }
+        nav ul li a:focus {
+            color: #663300;
+        }
+        .logo-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999; 
+        }
+        .logo-container img {
+            width: 80px; 
+            height: 80px;
+            border-radius: 50%; 
+        }
+        main {
+            padding: 20px;
+            margin-top: 100px;
+        }
+        .tab-content {
+            display: none;
+        }
+        #cart {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto; 
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .btn-add-to-cart {
+            background-color: #663300;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product {
+            background-color: rgba(0,0,0,.5);
+            color: #fff;
+            border-radius: 5%;
+            margin: 10px;
+            padding: 10px;
+            width: calc(33.33% - 20px); 
+            box-sizing: border-box;
+        }
+        .product img {
+            width: 100%;
+            height: auto; 
+            object-fit: cover; 
+            border-radius: 10px; 
+        }
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; 
+        }
+        @media screen and (max-width: 768px) {
+            .product {
+                width: calc(50% - 20px);
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .product {
+                width: 100%; 
+            }
+        }
+        .search-bar {
+            margin-right: 20px;
+        }
+        .search-bar input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+        .search-bar input[type="submit"] {
+            background-color: #663300;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        nav .btn {
+            background-color: #007043 !important;
+            border: #007043 !important;
+        }
+        nav .btn:hover{
+            background-color: #663300 !important;
+            border: #663300 !important;
+        }
+        main .btn {
+            background-color: #663300 !important;
+            border: #663300 !important;
+        }
+        main .btn:hover{
+            background-color: #8F5B1D !important;
+            border: #8F5B1D !important;
+        }
+        .navbar-brand img {
+            border-radius: 50%;
+        }
+        .footer {
+      background-color: rgba(0, 112, 74, 0.9);
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    </style>
+    <script>
+        var cart = [];
+
+        function addToCart(productName, productPrice, productImage) {
+            cart.push({ prod_name: productName, prod_price: productPrice , prod_image: productImage });
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            var cartElement = document.getElementById('cart');
+            cartElement.innerHTML = '';
+            var total = 0;
+            for (var i = 0; i < cart.length; i++) {
+                var item = cart[i];
+                cartElement.innerHTML += '<div class="cart-item">' + '<p>' + item.prod_name + ': $' + item.prod_price.toFixed(2) + ' <button onclick="removeFromCart(' + i + ')">Remove</button></p></div>';
+                total += item.prod_price;
+            }
+            document.getElementById('total').innerText = 'Total: $' + total.toFixed(2);
+            document.getElementById('cust_order').value = JSON.stringify(cart);
+        }
+
+
+        function showProducts(category) {
+            var products = [];
+            if (category === 'home') {
+                document.getElementById('home').style.display = 'block';
+                document.getElementById('hot-coffee').style.display = 'none';
+                document.getElementById('iced-coffee').style.display = 'none';
+                document.getElementById('pastries').style.display = 'none';
+                document.getElementById('tea').style.display = 'none';
+                document.getElementById('products').innerHTML = ''; 
+                return; 
+            } else {
+                document.getElementById('home').style.display = 'none';
+            }
+
+            if (category === 'hot-coffee') {
+                products = [
+                    { name: 'Espresso', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_Espresso_Single.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Cappuccino', price: 200, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_Cappuccino.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Latte', price: 225, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20220607_1401_CaramelBruleeLatte-onGreen-MOP_1800.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Americano', price: 150, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190617_CaffeAmericano.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Macchiato', price: 225, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20211029_CaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Mocha', price: 250, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20220607_CaffeMocha.jpg?impolicy=1by1_wide_topcrop_630' }
+                ];
+            } else if (category === 'iced-coffee') {
+                products = [
+                    { name: 'Iced Espresso', price: 200, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20201011_IcedShakenEspresso.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Iced Latte', price: 250, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190607_IcedCaffeLatte.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Iced Americano', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190607_IcedCaffeAmericano.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Iced Mocha', price: 275, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190607_IcedCaffeMocha.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Iced Cold Brew', price: 225, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20210611_ColdBrew.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Iced Caramel Macchiato', price: 275, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20181116_IcedCaramelMacchiato.jpg?impolicy=1by1_wide_topcrop_630' }
+                ];
+            } else if (category === 'pastries') {
+                products = [
+                    { name: 'Croissant', price: 150, image: 'https://globalassets.starbucks.com/digitalassets/products/food/SBX20210915_Croissant-onGreen.jpg?impolicy=1by1_medium_630' },
+                    { name: 'Danish Pastry', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/food/SBX20220125_CheeseDanish-onGreen.jpg?impolicy=1by1_medium_630' },
+                    { name: 'Cinnamon Roll', price: 200, image: 'https://globalassets.starbucks.com/digitalassets/products/food/SBX20180928_13792_MorningBun.jpg?impolicy=1by1_medium_630' },
+                    { name: 'Blueberry Muffin', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/food/SBX20220125_BlueberryMuffin_US.jpg?impolicy=1by1_medium_630' },
+                    { name: 'Chocolate Chip Cookie', price: 125, image: 'https://globalassets.starbucks.com/digitalassets/products/food/SBX20221206_ChocolateChunkCookie_CAN.jpg?impolicy=1by1_medium_630' },
+                    { name: 'Banana Bread Slice', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/food/SBX20190729_BananaNutBread_US.jpg?impolicy=1by1_medium_630' }
+                ];
+            } else if (category === 'tea') {
+                products = [
+                    { name: 'Green Tea', price: 150, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20181127_IcedMatchaGreenTeaLatte.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Black Tea', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190531_IcedBlackTea.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Chai Tea', price: 200, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20220810_IcedChaiTeaLatte.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Earl Grey', price: 175, image: 'https://globalassets.starbucks.com/digitalassets/products/bev/SBX20190624_EarlGreyBlackTea.jpg?impolicy=1by1_wide_topcrop_630' },
+                    { name: 'Peppermint Tea', price: 200, image: 'https://www.digitalassets.starbucks.eu/sites/starbucks-medialibrary/files/Mint-Herbal-Tea.jpeg' },
+                    { name: 'Camomile Tea', price: 175, image: 'https://www.digitalassets.starbucks.eu/sites/starbucks-medialibrary/files/Chamomile-Herbal-Blend-Tea_0.jpeg' }
+                ];
+            }
+
+            var productsElement = document.getElementById('products');
+            productsElement.innerHTML = '';
+            for (var i = 0; i < products.length; i++) {
+                var product = products[i];
+                productsElement.innerHTML += '<div class="product"><img src="' + product.image + '" alt="Product Image"><h2>' + product.name + '</h2><p>Price: PhP' + product.price.toFixed(2) + '</p><button class="btn btn-primary btn-add-to-cart" onclick="addToCart(\'' + product.name + '\', ' + product.price + ')">Add to Cart</button></div>';
+            }
+        }
+
+        function saveCustomerDetails() {
+            localStorage.setItem('cust_name', document.getElementById('cust_name').value);
+            localStorage.setItem('cust_addr', document.getElementById('cust_addr').value);
+            localStorage.setItem('cust_email', document.getElementById('cust_email').value);
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            saveCustomerDetails();
+            var cust_name = document.getElementById('cust_name').value;
+            var cust_addr = document.getElementById('cust_addr').value;
+            var cust_email = document.getElementById('cust_email').value;
+            var cust_order = document.getElementById('cust_order').value;
+
+            if (!cust_name || !cust_addr || !cust_email || !cust_order){
+                alert('Please input your delivery details.')
+                return;
+            }
+
+            var url = 'http://sirjm.infinityfreeapp.com/checkout.php';
+            url += '?cust_name=' + encodeURIComponent(cust_name);
+            url += '&cust_addr=' + encodeURIComponent(cust_addr);
+            url += '&cust_email=' + encodeURIComponent(cust_email);
+            url += '&cust_order=' + encodeURIComponent(cust_order);
+            window.location.href = url;
+        }
+
+        function searchProducts() {
+            var searchTerm = document.getElementById('search-input').value.toLowerCase();
+            var allProducts = document.querySelectorAll('.product');
+            allProducts.forEach(function(product) {
+                var productName = product.querySelector('h2').innerText.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+        window.addEventListener('scroll', function() {
+        var footer = document.getElementById('footer');
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            footer.style.display = 'block';
+        } else {
+            footer.style.display = 'none';
+        }
+    });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="images/starbslogo.png" alt="Coffee Shop Logo" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showProducts('home')">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showProducts('hot-coffee')">Hot</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showProducts('iced-coffee')">Iced</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showProducts('pastries')">Pastries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showProducts('tea')">Tea</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html" target="_self">About</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" onsubmit="searchProducts()">
+                <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Search products..." aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <main>
+        <div id="home" class="tab-content" style="display: block;">
+            <h2>Welcome to Starbucks!</h2>
+            <p>To inspire and nurture the human spirit, one person one cup and one neighborhood at a time.
+            </p>
+        </div>
+        <div id="hot-coffee" class="tab-content"></div>
+        <div id="iced-coffee" class="tab-content"></div>
+        <div id="pastries" class="tab-content"></div>
+        <div id="tea" class="tab-content"></div>
+        <div id="products" class="products-container"></div>
+        <div id="cart"></div>
+        <p id="total">Total: 0</p>
+        <form onsubmit="submitForm(event)">
+            <input type="text" id="cust_name" name="cust_name" placeholder="Your name">
+            <input type="text" id="cust_addr" name="cust_addr" placeholder="Your address">
+            <input type="email" id="cust_email" name="cust_email" placeholder="Your email">
+            <input type="hidden" id="cust_order" name="cust_order">
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </form>
+    </main>
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2024 Starbucks. All Rights Reserved.</p>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
